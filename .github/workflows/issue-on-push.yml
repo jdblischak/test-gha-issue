@@ -2,14 +2,19 @@
 on: [push]
 name: Create an issue on push
 jobs:
-  stuff:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: error
+        run: exit 1
+  issue:
     permissions:
       issues: write
     runs-on: ubuntu-latest
+    needs: build
+    if: failure() || cancelled()
     steps:
       - uses: actions/checkout@v3
       - uses: JasonEtco/create-an-issue@v2.8.0
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          update_existing: true
