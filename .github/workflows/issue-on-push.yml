@@ -23,5 +23,5 @@ jobs:
           gh issue create \
             --assignee jdblischak \
             --body "* Commit [${GITHUB_SHA:0:7}]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA)\n* Build [$GITHUB_RUN_ID]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)" \
-            --label "nightly" \
+            --label "bug" \
             --title "Nightly build failed on $(date '+%A (%Y-%m-%d)')"
