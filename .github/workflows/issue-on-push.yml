@@ -2,8 +2,6 @@
 on: [push, workflow_dispatch]
 name: Create an issue on push
 jobs:
-  env:
-      TZ: "America/New_York"
   build:
     runs-on: ubuntu-latest
     steps:
@@ -20,6 +18,7 @@ jobs:
       - name: Open Issue
         env:
           GH_TOKEN: ${{ github.token }}
+          TZ: "America/New_York"
         run: |
           gh issue create \
             --assignee jdblischak \
