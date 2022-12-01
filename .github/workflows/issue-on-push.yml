@@ -14,7 +14,12 @@ jobs:
     needs: build
     if: failure() || cancelled()
     steps:
-      - uses: actions/checkout@v3
-      - uses: JasonEtco/create-an-issue@v2.8.0
+      - name: Open Issue
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh issue create \
+            --assignee jdblischak \
+            --body "Build failed" \
+            --label "bug" \
+            --title "Issue from GitHub Actions"
