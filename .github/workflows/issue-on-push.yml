@@ -6,7 +6,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: error
-        run: echo passed
+        run: exit 1
   issue:
     permissions:
       issues: write
