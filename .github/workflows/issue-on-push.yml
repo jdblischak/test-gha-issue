@@ -2,6 +2,8 @@
 on: [push, workflow_dispatch]
 name: Create an issue on push
 jobs:
+  env:
+      TZ: "America/New_York"
   build:
     runs-on: ubuntu-latest
     steps:
@@ -21,6 +23,6 @@ jobs:
         run: |
           gh issue create \
             --assignee jdblischak \
-            --body "Build failed" \
-            --label "bug" \
-            --title "Issue from GitHub Actions"
+            --body "* Commit [${GITHUB_SHA:0:7}]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/commit/$GITHUB_SHA)\n* Build [$GITHUB_RUN_ID]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID)" \
+            --label "nightly" \
+            --title "Nightly build failed on $(date '+%A (%Y-%m-%d)')"
